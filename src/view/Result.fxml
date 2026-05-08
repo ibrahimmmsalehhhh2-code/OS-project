@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="20" xmlns:fx="http://javafx.com/fxml" fx:controller="view.Result" style="-fx-background-color: white;">
+    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+
+    <Label text="Algorithms Comparison Results" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="40">
+        <VBox spacing="10" HBox.hgrow="ALWAYS" style="-fx-border-color: #EEE; -fx-padding: 10;">
+            <Label text="SRTF Algorithm" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <HBox fx:id="srtfGanttContainer" minHeight="80" alignment="BOTTOM_LEFT" />
+            <Label fx:id="srtfMetricsLabel" style="-fx-font-family: 'Courier New';"/>
+        </VBox>
+
+        <VBox spacing="10" HBox.hgrow="ALWAYS" style="-fx-border-color: #EEE; -fx-padding: 10;">
+            <Label text="Priority Algorithm" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <HBox fx:id="priorityGanttContainer" minHeight="80" alignment="BOTTOM_LEFT" />
+            <Label fx:id="priorityMetricsLabel" style="-fx-font-family: 'Courier New';"/>
+        </VBox>
+    </HBox>
+
+    <VBox spacing="5" style="-fx-background-color: #F9F9F9; -fx-padding: 15;">
+        <Label fx:id="finalConclusionLabel" wrapText="true" style="-fx-font-size: 14px; -fx-text-fill: #2C3E50;"/>
+    </VBox>
+</VBox>
