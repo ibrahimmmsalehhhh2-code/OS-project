@@ -5,6 +5,8 @@ import model.Result;
 import java.util.List;
 
 public class MainController {
+
+
     public Result runSRTF(List<Process> p) {
         return new SRTFController(p).buildResult();
     }

@@ -8,7 +8,8 @@ import java.util.*;
 public class PriorityController {
     private List<Process> processes;
     public List<GanttChart> ganttChartList;
-    public double avgWT, avgTAT, avgRT;
+
+
 
     public PriorityController(List<Process> processes) {
         this.processes = new ArrayList<>();
@@ -17,7 +18,10 @@ public class PriorityController {
         }
     }
 
-    public Result buildResult() {
+
+
+
+    public Result   buildResult() {
         int n = processes.size();
         int currentTime = 0, completed = 0;
         ganttChartList = new ArrayList<>();
@@ -25,7 +29,24 @@ public class PriorityController {
         Process lastProcess = null;
         int startTime = 0;
 
-        while (completed < n) {
+
+
+
+
+        while (completed < n) {//aging
+            if (currentTime > 0 && currentTime % 5 == 0) {
+                for (Process p : processes) {
+                    if (p.arrivalTime <= currentTime && p.remainingTime > 0) {
+                        if (p.priority > 1) p.priority--;
+                    }
+                }
+            }
+
+
+
+
+
+
             int bestIdx = -1;
             int minPriority = Integer.MAX_VALUE;
 
@@ -40,6 +61,11 @@ public class PriorityController {
                     }
                 }
             }
+
+
+
+
+
             if (bestIdx != -1) {
                 Process p = processes.get(bestIdx);
                 if (lastProcess == null || !p.id.equals(lastProcess.id)) {
@@ -61,8 +87,11 @@ public class PriorityController {
         }
         if (lastProcess != null) ganttChartList.add(new GanttChart(lastProcess.id, startTime, currentTime));
 
-        return calculateAndPack("Priority Scheduling");
+        return calculateAndPack("Priority (with Aging)");
     }
+
+
+
 
     private Result calculateAndPack(String name) {
         double tWT = 0, tTAT = 0, tRT = 0;
@@ -70,7 +99,7 @@ public class PriorityController {
             p.turnAroundTime = p.finish - p.arrivalTime;
             p.waitingTime = p.turnAroundTime - p.burstTime;
             p.responseTime = p.firstStart - p.arrivalTime;
-            tWT += p.waitingTime; tTAT += p.turnAroundTime; tRT += p.responseTime;
+            tWT = tWT+p.waitingTime; tTAT += p.turnAroundTime; tRT += p.responseTime;
         }
         Result r = new Result(name);
         r.processes = processes;

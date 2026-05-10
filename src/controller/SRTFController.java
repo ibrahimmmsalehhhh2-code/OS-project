@@ -61,6 +61,9 @@ public class SRTFController {
                 currentTime++;
             }
         }
+
+
+
         if (lastProcess != null) {
             ganttChartList.add(new GanttChart(lastProcess.id, startTime, currentTime));
         }
